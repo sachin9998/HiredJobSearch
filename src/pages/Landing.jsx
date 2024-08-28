@@ -1,4 +1,11 @@
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -7,6 +14,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { Link } from "react-router-dom";
 import companies from "../data/companies.json";
+import faqs from "../data/faq.json";
 
 const LandingPage = () => {
   return (
@@ -63,9 +71,40 @@ const LandingPage = () => {
         </Carousel>
       </div>
 
-      <section>{/* Cards */}</section>
+      {/* Banner Image */}
+      <img src="./banner.jpeg" alt="" />
+
+      {/* Cards */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card>
+          <CardHeader>
+            <CardTitle>For Job Seekers</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Search and apply for jobs, track applications, and more.</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>For Employers</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Post jobs, manage applications, and find the best candidates.</p>
+          </CardContent>
+        </Card>
+      </section>
 
       {/* Accordian */}
+      <Accordion type="single" collapsible>
+        {faqs.map((faq, index) => {
+          return (
+            <AccordionItem key={index} value={index + 1}>
+              <AccordionTrigger>{faq.question}</AccordionTrigger>
+              <AccordionContent>{faq.answer}</AccordionContent>
+            </AccordionItem>
+          );
+        })}
+      </Accordion>
     </main>
   );
 };

@@ -17,6 +17,7 @@ const Header = () => {
         </Link>
 
         <Button variant="outline">Login</Button>
+  
 
         {/* <SignedOut>
           <SignInButton />
