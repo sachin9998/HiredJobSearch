@@ -1,5 +1,12 @@
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import { Link } from "react-router-dom";
+import companies from "../data/companies.json";
 
 const LandingPage = () => {
   return (
@@ -38,8 +45,23 @@ const LandingPage = () => {
         </Link>
       </div>
 
-      {/* Company Banners */}
-      
+      {/* Company Banners aka Carousel */}
+      <div>
+        <Carousel
+          plugins={[Autoplay({ delay: 2000, stopOnInteraction: true })]}
+          className="w-full py-10"
+        >
+          <CarouselContent className="flex gap-5 sm:gap-20 items-center">
+            {companies.map(({ name, id, path }) => {
+              return (
+                <CarouselItem className="basis-1/3 lg:basis-1/6" key={id}>
+                  <img className="h-9 sm:h-14 " src={path} alt={name} />
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
+        </Carousel>
+      </div>
 
       <section>{/* Cards */}</section>
 
