@@ -1,13 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./components/ui/theme-provider";
 import AppLayout from "./layout/AppLayout";
-import Job from "./pages/Job";
 import JobListing from "./pages/JobListing";
 import LandingPage from "./pages/Landing";
 import MyJobs from "./pages/MyJobs";
 import Onboarding from "./pages/Onboarding";
 import PostJob from "./pages/PostJob";
 import SavedJobs from "./pages/SavedJobs";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Job from "./pages/Job";
 
 const router = createBrowserRouter([
   {
@@ -19,27 +20,51 @@ const router = createBrowserRouter([
       },
       {
         path: "/onboarding",
-        element: <Onboarding />,
+        element: (
+          <ProtectedRoute>
+            <Onboarding />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/jobs",
-        element: <JobListing />,
-      },
-      {
-        path: "/job/:id",
-        element: <Job />,
+        element: (
+          <ProtectedRoute>
+            <JobListing />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/post-job",
-        element: <PostJob />,
-      },
-      {
-        path: "/saved-job",
-        element: <SavedJobs />,
+        element: (
+          <ProtectedRoute>
+            <PostJob />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/my-jobs",
-        element: <MyJobs />,
+        element: (
+          <ProtectedRoute>
+            <MyJobs />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/saved-jobs",
+        element: (
+          <ProtectedRoute>
+            <SavedJobs />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/job/:id",
+        element: (
+          <ProtectedRoute>
+            <Job />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
