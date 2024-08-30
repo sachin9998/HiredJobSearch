@@ -8,9 +8,9 @@ const Onboarding = () => {
   const { user, isLoaded } = useUser();
   const navigate = useNavigate();
 
-  if (!isLoaded) {
-    return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
-  }
+  const navigateUser = (currRole) => {
+    navigate(currRole === "recruiter" ? "/post-job" : "/jobs");
+  };
 
   const handleRoleSelection = async (role) => {
     await user
@@ -27,11 +27,13 @@ const Onboarding = () => {
 
   useEffect(() => {
     if (user?.unsafeMetadata?.role) {
-      navigate(
-        user?.unsafeMetadata?.role === "recruiter" ? "/post-job" : "/jobs"
-      );
+      navigateUser(user.unsafeMetadata.role);
     }
   }, [user]);
+
+  if (!isLoaded) {
+    return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
+  }
 
   return (
     <div className="flex flex-col items-center mt-32">
